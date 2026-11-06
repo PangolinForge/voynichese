@@ -1,19 +1,31 @@
-# Stage 1 methods and known limitations
+# Registration methodology and limitations
 
-The V3 run used source Voynichese word rectangles with original EVA audit transcriptions, a local set of **213 original Yale TIFF images**, and a locally installed `voynich_box_fit_v3/fit_all_pages.py` algorithm. The rerun report describes multi-peak candidate search, rotation fallback ±6°, 8% foldout search margin, top/bottom padding and shared-scale retries. No Yale image files are redistributed in this branch.
+## Input and algorithm
 
-## 6 November 2026 V3 rerun
+The V3 run used the source Voynichese word rectangles, a local set of 213 unmodified high-resolution Yale TIFFs, and the installed `voynich_box_fit_v3/fit_all_pages.py` program. The rerun archive states these algorithmic enhancements: multi-peak candidate search, ±6° rotation fallback, 8% foldout margin, top/bottom padding, and shared-scale retry where panels share a TIFF.
 
-- 225 folio/panel attempts: 196 OK, 23 CHECK, 5 FAIL, 1 SKIP.
-- 224 mapped folio/panel entries in the resulting word CSV.
-- 37,673 registered word records, preserved in the authoritative CSV. SHA-256 `f5b3d740368f2facb165a66481960a47be361f64473e8c1e5eae9766bc562b4c`.
-- 224 XML exports with 37,629 words. 44 boxes omitted from XML: 33 explicitly `zero_size`, 1 explicitly `off_image`, and 10 further positions outside the TIFF boundary.
-- In the authoritative CSV every word retains its source and Yale coordinates, quadrilateral corners, source word index, EVA audit transcription, status and score.
+The `fit_summary.csv` contains one row for each of 225 attempts. The 1 SKIP was `f101v2` (source text straddling two TIFFs). The 5 FAIL entries were `f70r2`, `f72r2`, `f72v2`, `f72v3`, and `f102v2`. The master CSV includes 224 attempted entries with actual rows.
 
-For XML, each full four-corner registered polygon is outward-rounded to its axis-aligned integer bounding rectangle and compared to the TIFF pixel bounds. Excluded records remain intact in the CSV and are itemized in the release's exclusions sidecar.
+## From V3 quadrilateral to XML
 
-## Verification boundary
+- Native `tiff_width` and `tiff_height` become `<folio width=... height=...>`.
+- The original `word_index` is retained unchanged.
+- For each four-corner word polygon, use `x=floor(min(all x))`, `y=floor(min(all y))`, `right=ceil(max(all x))`, `bottom=ceil(max(all y))`.
+- Export `width=right-x`, `height=bottom-y`.
+- Exclude flagged `zero_size`/`off_image` records and any invalid/outside-TIFF box from XML. **No clipping, no fabricated corrections.**
+- Preserve all records, corner coordinates, statuses and flags in `registered_word_boxes_v3.csv`.
 
-V3 `OK` does **not** mean an independent photographic match has been confirmed. An independent low-resolution/Yale comparison was piloted; the multi-panel viewport selection remains provisional for many folios. Neither transcription segmentation nor glyph identity is independently certified here. Users must not claim pixel-perfect or independently verified Yale coordinates on the basis of these outputs alone.
+44 rows are excluded from XML; see the individual records and reasons in `data/excluded_from_xml.csv`. Those rows are not deleted from the authoritative CSV.
 
-The V3 input image-fitting program was not present in the latest uploaded results ZIP, so that pipeline stage cannot be reproduced using this publication alone. No decipherment claims are made.
+## Checks and cautions
+
+- XML parses with ordinary XML parsers; `wordCount` matches each file's child count.
+- Each exported rectangle lies wholly within its declared TIFF dimensions.
+- `OK` is a heuristic quality category from V3. It does not show independent photo-to-photo registration accuracy.
+- Direct XML-to-Yale comparison is not independent validation if the same transform is used to define both sides.
+- A later independent-photo QC pilot produced strong results for f100r but provisional panel cases elsewhere; this early release does not elevate those provisional cases to verified matches.
+- The original source transcription can have segmentation errors. EVA is an audit field, not a decipherment.
+
+## Integrity
+
+Check `export_manifest.json` for the source CSV SHA-256 and output counts. The uploaded archive's recorded SHA-256 value for the master CSV is `f5b3d740368f2facb165a66481960a47be361f64473e8c1e5eae9766bc562b4c`.

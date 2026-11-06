@@ -1,7 +1,10 @@
-# Original rights, attribution, and derived data
+# Attribution and notices
 
-The [Voynichese Project enhanced-transcription dataset](https://github.com/voynichese/voynichese/blob/wiki/DataSets.md) documents its original spatial XML under the **Apache License 2.0**. Original example files carry a 2014 Voynichese Project copyright and licence notice. See also the [upstream credits](https://github.com/voynichese/voynichese/blob/wiki/CreditsAndCopyright.md), including EVA transcription contributions from **Takeshi Takahashi** and **Jorge Stolfi**.
+- **Original Voynichese enhanced spatial transcription (2014):** Copyright (C) 2014 The Voynichese Project. The original [DataSets documentation](https://github.com/voynichese/voynichese/blob/wiki/DataSets.md) specifies the **Apache License 2.0** for the downloadable spatial XML dataset and documents the original XML structure.
+- **Original project credit:** [Voynichese Credits & Copyright](https://github.com/voynichese/voynichese/blob/wiki/CreditsAndCopyright.md). The upstream project credits several EVA transcribers, including **Takeshi Takahashi** and **Jorge Stolfi**, as well as original font contributors.
+- **Coordinates and transformed exports:** Produced by the PangolinForge Voynich research workflow. Added columns include native TIFF geometry, registration transforms, polygon corner points, fit scores and verification flags. These modifications should not be confused with the original dataset's authored word boxes.
+- **Yale images:** The underlying manuscript TIFF scans were supplied from the Yale Beinecke Library collection and remain in the researcher's immutable local directory. **No Yale scans, crops or other image assets are included in this publication.** Photograph rights and attribution must be handled separately.
+- **EVA field:** The CSV's `eva_audit_only` values reproduce the source transcription for auditability. They are neither newly deciphered nor automatically validated glyph labels.
+- **Export script:** Released with the Apache License 2.0 accompanying this directory, subject to upstream dataset notices. No assertion is made about the licensing of other upstream repository code not included here.
 
-Our modifications convert source word-box geometry to high-resolution Yale TIFF coordinate frames, and record added transform information, quadrilateral bounds, quality statuses and source-identity information. Retained EVA strings are **audit copies**, not independently classified symbols.
-
-No Yale Beinecke manuscript photos are copied into the GitHub publication. Any reuse of Yale images requires checking Yale's terms separately. The accompanying Apache 2.0 text is for included derived XML/data and newly authored export tooling; it is not a blanket licence for all other upstream code or Yale scans.
+**Changes from original Voynichese spatial data:** coordinates were algorithmically mapped to different image frames and converted to a TIFF-native schema. Some source word boxes were excluded from the simplified XML when flagged invalid or mapped outside an image. The complete source-derived row set is preserved in the main CSV.

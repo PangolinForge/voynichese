@@ -1,0 +1,32 @@
+{
+  "bounding_box_policy": "floor(min(corner)), ceil(max(corner)); no clipping; exclude flagged source boxes",
+  "geometry_source": "quad corners in registered_word_boxes_v3.csv",
+  "independent_verification": "NOT COMPLETE; folio status is heuristic",
+  "input_csv": "registered_word_boxes_v3.csv",
+  "input_flags": {
+    "off_image": 1,
+    "zero_size": 33
+  },
+  "input_rows": 37673,
+  "input_sha256": "f5b3d740368f2facb165a66481960a47be361f64473e8c1e5eae9766bc562b4c",
+  "input_status_by_word": {
+    "CHECK": 2851,
+    "FAIL": 774,
+    "OK": 34048
+  },
+  "schema": "v3_yale_spatial_export_v1",
+  "source_folios": 224,
+  "xml_exclusion_reasons": {
+    "flagged_off_image": 1,
+    "flagged_zero_size": 33,
+    "transformed_box_outside_tiff": 10
+  },
+  "xml_exclusions": 44,
+  "xml_folios": 224,
+  "xml_status_by_word": {
+    "CHECK": 2840,
+    "FAIL": 773,
+    "OK": 34016
+  },
+  "xml_words": 37629
+}

@@ -1,0 +1,26 @@
+{
+  "version": "VGR-VOYNICHESE-FULL-BATCH-V3-0.3",
+  "source_algorithm": "user-supplied voynich_box_fit_v3/fit_all_pages.py",
+  "enhancements_in_v3": [
+    "multi-peak candidate search",
+    "rotation fallback +/-6 degrees",
+    "8 percent foldout search margin",
+    "top/bottom padding",
+    "shared-scale retry for panels on same TIFF"
+  ],
+  "height_per_scale_prior": 1518,
+  "scale_tolerance": 0.03,
+  "status_counts": {
+    "CHECK": 23,
+    "OK": 196,
+    "FAIL": 5,
+    "SKIP": 1
+  },
+  "folio_rows_attempted": 225,
+  "registered_word_box_rows": 37673,
+  "rotated_fits_abs_angle_ge_0_5deg": 30,
+  "registered_word_boxes_csv": "registered_word_boxes_v3.csv",
+  "review_index": "review_index.html (not included; generated on the research Mac)",
+  "eva_policy": "retained as audit metadata only; not used as glyph class labels",
+  "publication_note": "Local absolute paths normalized for public release; other run metrics preserved unchanged."
+}
